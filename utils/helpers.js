@@ -13,6 +13,45 @@ export function getSeason() {
     return season;
 }
 
+export function calcMatchPoint(home_id, away_id, teams) {
+
+    let lastfive = getLastFiveMatchPoint(home_id, away_id, teams);
+    let positionMatchPoint = getPositionMatchPoint(home_id, away_id, teams);
+    let tablePointMatchPoint = getTablePointMatchPoint(home_id, away_id, teams);
+
+    let luck = Math.floor(Math.random() * 2);
+
+    let _homematchpoint = lastfive.home + positionMatchPoint.home + tablePointMatchPoint.home + (luck == 0 ? pointShares.luck : 0) + pointShares.homeadvantage;
+    let _awaymatchpoint = lastfive.away + positionMatchPoint.away + tablePointMatchPoint.away + (luck == 1 ? pointShares.luck : 0);
+
+    return {
+        home: _homematchpoint,
+        away: _awaymatchpoint
+    }
+
+}
+
+export function convertMatchPointToOdd(home_point, away_point) {
+    let home_odd = (((totalAvailableOdd - 2) - ((home_point / pointShares.total) * (totalAvailableOdd - 2))) + 1).toFixed(2);
+    let away_odd = (((totalAvailableOdd - 2) - ((away_point / pointShares.total) * (totalAvailableOdd - 2))) + 1).toFixed(2);
+
+    return {
+        home: home_odd,
+        away: away_odd
+    }
+}
+
+export function convertOddToMatchPoint(home_odd, away_odd) {
+    let home_point = (((totalAvailableOdd - 2) - (home_odd - 1)) / (totalAvailableOdd - 2)) * pointShares.total
+    let away_point = (((totalAvailableOdd - 2) - (away_odd - 1)) / (totalAvailableOdd - 2)) * pointShares.total
+
+    return {
+        home: home_point,
+        away: away_point
+    }
+}
+
+
 function getLastFiveMatchPoint(home_id, away_id, teams) {
 
     let _home = teams.find((e) => e.id == home_id);
@@ -123,43 +162,5 @@ function getTablePointMatchPoint(home_id, away_id, teams) {
             home: _homematchpoint,
             away: _awaymatchpoint
         }
-    }
-}
-
-export function calcMatchPoint(home_id, away_id, teams) {
-
-    let lastfive = getLastFiveMatchPoint(home_id, away_id, teams);
-    let positionMatchPoint = getPositionMatchPoint(home_id, away_id, teams);
-    let tablePointMatchPoint = getTablePointMatchPoint(home_id, away_id, teams);
-
-    let luck = Math.floor(Math.random() * 2);
-
-    let _homematchpoint = lastfive.home + positionMatchPoint.home + tablePointMatchPoint.home + (luck == 0 ? pointShares.luck : 0) + pointShares.homeadvantage;
-    let _awaymatchpoint = lastfive.away + positionMatchPoint.away + tablePointMatchPoint.away + (luck == 1 ? pointShares.luck : 0);
-
-    return {
-        home: _homematchpoint,
-        away: _awaymatchpoint
-    }
-
-}
-
-export function convertMatchPointToOdd(home_point, away_point) {
-    let home_odd = (((totalAvailableOdd - 2) - ((home_point / pointShares.total) * (totalAvailableOdd - 2))) + 1).toFixed(2);
-    let away_odd = (((totalAvailableOdd - 2) - ((away_point / pointShares.total) * (totalAvailableOdd - 2))) + 1).toFixed(2);
-
-    return {
-        home: home_odd,
-        away: away_odd
-    }
-}
-
-export function convertOddToMatchPoint(home_odd, away_odd) {
-    let home_point = (((totalAvailableOdd - 2) - (home_odd - 1)) / (totalAvailableOdd - 2)) * pointShares.total
-    let away_point = (((totalAvailableOdd - 2) - (away_odd - 1)) / (totalAvailableOdd - 2)) * pointShares.total
-
-    return {
-        home: home_point,
-        away: away_point
     }
 }
