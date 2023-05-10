@@ -1,18 +1,17 @@
-
-export const totalAvailableOdd = 4;
+export const totalAvailableOdd = 6;
 export const drawOdd = 2;
 
-export const matchDelay = 30;
-export const delayAfterOdds = 20;
+export const matchDelay = 10;
+export const delayAfterOdds = 10;
 
 export const maxTotalGoals = 7;
 
 export const pointShares = {
-    lastfive: 40,
-    tableposition: 30,
-    tablepoint: 15,
-    homeadvantage: 10,
-    luck: 5,
+    lastfive: 30,
+    tableposition: 15,
+    tablepoint: 20,
+    homeadvantage: 25,
+    luck: 10,
     total: 100
 }
 
