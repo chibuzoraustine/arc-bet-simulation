@@ -1,4 +1,4 @@
-export const totalAvailableOdd = 6;
+export const totalAvailableOdd = 4;
 export const drawOdd = 2;
 
 export const matchDelay = 10;
