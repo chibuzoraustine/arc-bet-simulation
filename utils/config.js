@@ -1,8 +1,8 @@
-export const totalAvailableOdd = 6;
+export const totalAvailableOdd = 4;
 export const drawOdd = 2;
 
-export const matchDelay = 10;
-export const delayAfterOdds = 10;
+export const matchDelay = 15;
+export const delayAfterOdds = 15;
 
 export const maxTotalGoals = 7;
 
